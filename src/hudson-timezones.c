@@ -60,8 +60,8 @@ timezone_layer_update(
                       )
 {
     city_time *city=*(city_time **)layer_get_data(me) ;
-    APP_LOG(APP_LOG_LEVEL_DEBUG, "layer_update: Layer %p, city %p", me, city);
-    APP_LOG(APP_LOG_LEVEL_DEBUG, "layer_update: %10s %s %s", city->name, city->time, city->night_time ? "(night)" : "(day)");
+    // APP_LOG(APP_LOG_LEVEL_DEBUG, "layer_update: Layer %p, city %p", me, city);
+    // APP_LOG(APP_LOG_LEVEL_DEBUG, "layer_update: %10s %s %s", city->name, city->time, city->night_time ? "(night)" : "(day)");
 
     GRect bounds=layer_get_bounds(me) ;
 	const int16_t w = bounds.size.w;
@@ -145,7 +145,7 @@ static void init(void) {
     int screen_width  = bounds.size.w;
     int screen_height = bounds.size.h;
     int layer_height  = screen_height / NUM_TIMEZONES ;
-    APP_LOG(APP_LOG_LEVEL_DEBUG, "Screen dimensions: %dx%d", screen_width, screen_height);
+    // APP_LOG(APP_LOG_LEVEL_DEBUG, "Screen dimensions: %dx%d", screen_width, screen_height);
     
 	font_thin = fonts_load_custom_font(resource_get_handle(CITY_FONT));
 	font_thick = fonts_load_custom_font(resource_get_handle(CLOCK_FONT));
@@ -158,13 +158,13 @@ static void init(void) {
                    );
 
         update_time(now, timezones[i].offset, &(timezones[i].city));
-        APP_LOG(APP_LOG_LEVEL_DEBUG, "City %d - %p", i, &(timezones[i].city));
-        APP_LOG(APP_LOG_LEVEL_DEBUG,
+        // APP_LOG(APP_LOG_LEVEL_DEBUG, "City %d - %p", i, &(timezones[i].city));
+        /* APP_LOG(APP_LOG_LEVEL_DEBUG,
                 "Name='%s', time='%s' (%s), offset=%d",
                 timezones[i].city.name,
                 timezones[i].city.time,
                 timezones[i].city.night_time ? "night" : "day",
-                timezones[i].offset);
+                timezones[i].offset); */
         layer_set_data(layer, city_time *, &(timezones[i].city));
         layer_set_update_proc(layer, timezone_layer_update);
 		layer_add_child(window_layer, layer);
