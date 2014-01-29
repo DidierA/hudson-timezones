@@ -11,7 +11,7 @@ I have ported it to SDK 2.0, and added a 4 timezones option.
 ## Configure
 To configure timezones, change src/hudson-timezones.c :
 * set gmt_offset to your local timezone
-* change #define NUM_TIMEZONES , and comment/uncomment the font definition macros accordingly.
+* change #define NUM_TIMEZONES , and comment/uncomment the font definition macros accordingly. If you change this, you must also change appinfo.json accordingly.
 * in array timezones[NUM_TIMEZONES], replace the city names and offset by the ones you want (offset is in minutes from UTC).
 
 ## Build
