@@ -21,13 +21,13 @@
           },
           {
               "type": "font",
-              "characterRegex": "[:0-9A-Za-z]",
+              "characterRegex": "[:0-9A-Za-z-]",
               "name": "FONT_ARIAL_16",
               "file": "fonts/Arial.ttf"
           },
           {
               "type": "font",
-              "characterRegex": "[:0-9A-Za-z]",
+              "characterRegex": "[:0-9]",
               "name": "FONT_ARIAL_BLACK_30",
               "file": "fonts/Arial-Black.ttf"
           }

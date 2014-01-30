@@ -34,7 +34,7 @@
 // this struct will be attached to each layer, and contains data to display
 typedef struct {
     char *name;
-    char time[6];
+    char time[9];
     int night_time;
 } city_time;
 
@@ -115,16 +115,14 @@ static void update_time(struct tm *now, int offset, city_time *city) {
     struct tm here=*now ;
     
 	here.tm_min += (offset - gmt_offset) % 60;
-	if (here.tm_min > 60)
-	{
+	if (here.tm_min >= 60) {
 		here.tm_hour++;
 		here.tm_min -= 60;
-	} else
-        if (here.tm_min < 0)
-        {
-            here.tm_hour--;
-            here.tm_min += 60;
-        }
+	}
+    if (here.tm_min < 0) {
+        here.tm_hour--;
+        here.tm_min += 60;
+    }
     
 	here.tm_hour += (offset - gmt_offset) / 60;
 	if (here.tm_hour > 23)
@@ -133,7 +131,10 @@ static void update_time(struct tm *now, int offset, city_time *city) {
 		here.tm_hour += 24;
     
     // format for display
-    strftime(city->time, sizeof(city->time), "%H:%M", &here);
+    strftime(city->time, sizeof(city->time),
+    //         clock_is_24h_style() ? "%H:%M" : "%I:%M %p",
+             "%H:%M",
+             &here);
     
 	city->night_time = (here.tm_hour > 18 || here.tm_hour < 6);
 
