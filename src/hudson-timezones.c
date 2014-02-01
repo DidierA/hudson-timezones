@@ -132,11 +132,12 @@ static void update_time(struct tm *now, int offset, city_time *city) {
     
     // format for display
     strftime(city->time, sizeof(city->time),
-    //         clock_is_24h_style() ? "%H:%M" : "%I:%M %p",
-             "%H:%M",
+             clock_is_24h_style() ? "%H:%M" : "%I:%M",
              &here);
     
-	city->night_time = (here.tm_hour > 18 || here.tm_hour < 6);
+    // it is night between 7:00pm and 6:59am,
+    // so there is no ambiguity when using 12h format
+	city->night_time = (here.tm_hour > 18 || here.tm_hour < 7);
 
 }
 
